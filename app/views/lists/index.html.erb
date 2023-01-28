@@ -1,0 +1,10 @@
+<%= render "navbar" %>
+<div class="container">
+  <h1 class="my-3">Save any kind of film</h1>
+  <h2>My lists</h2>
+  <% @lists.each do |list| %>
+  <%= link_to list.name, list_path(list) %>
+  <% end %>
+  <br>
+  <button class="btn btn-warning"><%= link_to 'Create new list', new_list_path, class: "text-white" %></button>
+</div>

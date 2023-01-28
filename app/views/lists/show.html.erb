@@ -1,0 +1,19 @@
+<%= render "navbar" %>
+<div class="container">
+  <h1 class="my-3"><span><%= @list.name %></span></h1>
+  <p class="btn btn-primary">Add a movie (bookmark)</p>
+
+  <% @movies.each do |film| %>
+    <div class="card" style="width: 18rem;">
+    <img src=<%=film.poster_url %> class="card-img-top" alt="Picture of film">
+      <div class="card-body">
+        <h5 class="card-title"><%= film.title %>  Rating: <%= film.rating %></h5>
+        <p class="card-text"><%= film.overview %>
+        </p>
+        <%= link_to 'Delete',
+        list_path(film),
+        data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }%>
+      </div>
+    </div>
+  <% end %>
+</div>
