@@ -1,9 +1,7 @@
-<%= render "navbar" %>
 <div class="container">
-<h1 class="my-3">Create a list</h1>
-  <%= simple_form_for [@list] do |f| %>
-  <%= f.input :name %>
-  <%= f.association :movies, as: :check_boxes %>
-  <%= f.submit "Submit list", class: "btn btn-warning" %>
-  <% end %>
+  <h3 class="mb-3">Create a new list</h3>
+    <%= simple_form_for @list do |f| %>
+      <%= f.input :name %>
+      <%= f.submit %>
+    <% end %>
 </div>

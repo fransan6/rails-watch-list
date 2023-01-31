@@ -7,8 +7,6 @@ class BookmarksController < ApplicationController
   def create
     @list = List.find(params[:list_id])  # tfs
     @bookmark = Bookmark.new(bookmark_params)
-    # @bookmark.movie_id = @movie.id
-    # @bookmark.list_id = @list.id
     @bookmark.list = @list  # taken from solution
     if @bookmark.save
       # redirect_to bookmark_path(@bookmark)
@@ -27,6 +25,6 @@ class BookmarksController < ApplicationController
   private
 
   def bookmark_params
-    params.require(:bookmark).permit(:comment)
+    params.require(:bookmark).permit(:comment, :movie_id)
   end
 end

@@ -1,19 +1,27 @@
-<%= render "navbar" %>
 <div class="container">
-  <h1 class="my-3"><span><%= @list.name %></span></h1>
-  <p class="btn btn-primary">Add a movie (bookmark)</p>
+  <h1><%= @list.name %></h1>
+  <span class="movie-tag"><%= @list.movies.count %> movie(s) in this list</span>
 
-  <% @movies.each do |film| %>
-    <div class="card" style="width: 18rem;">
-    <img src=<%=film.poster_url %> class="card-img-top" alt="Picture of film">
-      <div class="card-body">
-        <h5 class="card-title"><%= film.title %>  Rating: <%= film.rating %></h5>
-        <p class="card-text"><%= film.overview %>
-        </p>
-        <%= link_to 'Delete',
-        list_path(film),
-        data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }%>
+<br><br>
+  <%= link_to "Delete this list", list_path(@list), class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this list?" } %>
+
+<br><br><br>
+  <%= simple_form_for [@list, @bookmark] do |f| %>
+    <%= f.association :movie, collection: Movie.all.order(:title), prompt: "Select a movie" %>
+    <%= f.input :comment %>
+    <%= f.submit "Add movie" %>
+  <% end %>
+<br><br><br>
+
+  <% @list.movies.each do |movie| %>
+    <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
+      <div class="card" style="width: 25rem;">
+        <%= image_tag movie.poster_url, alt: movie.title, class: "card-img-top rounded-top" %>  <div class="card-body">
+        <h5 class="card-title"><%= movie.title %> (<%= movie.rating %>)</h5>
+        <p class="card-text"><%= movie.overview %></p>
+        <p class="text-primary">"<%= bookmark.comment %>"</p>
+        <%= link_to "Delete", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to remove #{movie.title} from your #{@list.name} list"}, class: 'text-danger' %>  </div>
       </div>
-    </div>
+<br>
   <% end %>
 </div>

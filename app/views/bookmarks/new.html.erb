@@ -1,0 +1,8 @@
+<div class="container py-5">
+  <h3>Add a movie to your list</h3>
+  <%= simple_form_for [@list, @bookmark] do |f| %>
+    <%= f.association :movie, label: "Select a bookmark movie"%>
+    <%= f.input :comment %>
+    <%= f.submit %>
+  <% end %>
+</div>
