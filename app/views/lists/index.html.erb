@@ -3,9 +3,18 @@
   <h3 class="mt-5">My Lists</h3>
     <%= link_to "Create a movie list", new_list_path %>
 <br><br><br>
-    <% @lists.each do |list| %>
-      <ul>
-        <li><%= link_to list.name, list_path(list), class:"text-black"%></li>
-      </ul>
+  <% @lists.each do |list| %>
+    <div class="card" style="width: 25rem;">
+    <% if list.photo.attached? %>
+      <%= cl_image_tag list.photo.key, class: "card-img-top rounded-top" %>
     <% end %>
+      <div class="card-body">
+        <h5 class="card-title"><%= link_to list.name, list_path(list) %></h5>
+      </div>
+    </div>
+<br>
+  <% end %>
+<%# <br><br><br>
+  <%= cl_image_tag("eom4swgy9vxt6dfksb91.jpg", width: 400, height: 300, crop: :fill) %>
+<br><br>
 </div>
