@@ -1,5 +1,7 @@
 <div class="container">
   <h1><%= @list.name %></h1>
+  <%= cl_image_tag @list.photo.key, height: 100, crop: :fill %>
+
   <span class="movie-tag"><%= @list.movies.count %> movie(s) in this list</span>
 
 <br><br>
@@ -21,7 +23,7 @@
           <h5 class="card-title"><%= movie.title %> (<%= movie.rating %>)</h5>
           <p class="card-text"><%= movie.overview %></p>
           <p class="text-primary">"<%= bookmark.comment %>"</p>
-          <%= link_to "Delete", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to remove #{movie.title} from your #{@list.name} list"}, class: 'text-danger' %>  </div>
+          <%= link_to "Delete", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to remove #{movie.title} from your #{@list.name} list"}, class: 'text-danger' %>
         </div>
       </div>
 <br>
