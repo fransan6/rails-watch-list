@@ -24,4 +24,19 @@
       </div>
 <br>
   <% end %>
+
+  <h3>Add a review</h3>
+  <%= simple_form_for [@list, @review] do |f| %>
+    <%= f.input :rating, label: 'Rating out of 5' %>
+    <%= f.input :content, label: 'Comment' %>
+    <%= f.submit "Add review" %>
+  <% end %>
+<br><br>
+  <h3>Reviews</h3>
+  <% @list.reviews.each do |review| %>
+    <p class="fw-bold" ><%= review.rating %> stars</p>
+    <p><%= review.content %></p>
+    <hr>
+  <% end %>
+<br>
 </div>
