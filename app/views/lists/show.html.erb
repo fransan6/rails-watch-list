@@ -1,7 +1,8 @@
 <div class="container">
   <h1><%= @list.name %></h1>
+<% if @list.photo.attached? %>
   <%= cl_image_tag @list.photo.key, height: 100, crop: :fill %>
-
+<% end %>
   <span class="movie-tag"><%= @list.movies.count %> movie(s) in this list</span>
 
 <br><br>
